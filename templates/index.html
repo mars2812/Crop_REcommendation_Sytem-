@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h2>Crop Recommendation System</h2>
+
+    <form action="/predict" method="post">
+        <label>City:</label>
+        <input type="text" name="city" required><br> 
+        <label>Temperature (°C):</label><input type="text" name="temperature" required><br>
+        <label>Nitrogen:</label><input type="text" name="nitrogen" required><br>
+        <label>Phosphorus:</label><input type="text" name="phosphorus" required><br>
+        <label>Potassium:</label><input type="text" name="potassium" required><br>
+        <label>pH:</label><input type="text" name="ph" required><br>
+        <label>Rainfall:</label><input type="text" name="rainfall" required><br>
+        <label>Soil Color:</label>
+        <select name="soil_color" required>
+            <option value="Black">Black</option>
+            <option value="Red">Red</option>
+            <option value="Alluvial">Alluvial</option>
+            <option value="Laterite">Laterite</option>
+            <option value="Clayey">Clayey</option>
+            <option value="Sandy">Sandy</option>
+        </select><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+    <div class="result-container">
+        <h3 class="crop">🌾 Recommended Crop: <span>{{ prediction_text }}</span></h3>
+        <h3 class="fertilizer">💡 Fertilizer Suggestion: <span>{{ fertilizer_text }}</span></h3>
+        <h3 class="weather">☁️ Weather Info: <span>{{ weather_info }}</span></h3>
+        <h3 class="disease">⚠️ Disease Alert: <span>{{ disease_text }}</span></h3>
+        <h3 class="prevention">🛡 Prevention Tips: <span>{{ prevention_text }}</span></h3>
+    </div>
+    
+    {% endif %}
+
+    <footer>
+        <p>🌱 Crop Recommendation System &copy; <span id="year"></span> | Developed by Matrika Dhamala</p>
+        <div class="footer-icons">
+            <a href="https://www.facebook.com/milan.dhamala.735" target="_blank">📘 Facebook</a>
+            <a href="https://www.twitter.com" target="_blank">🐦 Twitter</a>
+            <a href="https://www.linkedin.com/in/matrika-dhamala-770390200/" target="_blank">📷 Instagram</a>
+        </div>
+    </footer>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
